@@ -1,8 +1,6 @@
 package com.example.firstyalantistask;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -37,29 +35,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         ButterKnife.bind(this);
-        recyclerView.setHasFixedSize(true);
+        initRecyclerView();
         setOCL();
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new RecyclerViewAdapter(addLinks(), this));
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
     }
     //Getting links of images from resources
     List<String> addLinks(){
         List<String> links = new ArrayList<>();
         String[] resourceLinks = getResources().getStringArray(R.array.urls);
-        for(int i = 0; i<resourceLinks.length; i++){
-            links.add(resourceLinks[i]);
+        for(String link:resourceLinks){
+            links.add(link);
         }return links;
     }
 
@@ -93,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rlRegistered.setOnClickListener(this);
         rlSolve.setOnClickListener(this);
         rlResponsible.setOnClickListener(this);
-        recyclerView.setOnClickListener(this);
     }
 
     @Override
@@ -115,6 +101,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    //initialize recyclerView for images
+    void initRecyclerView(){
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(new RecyclerViewAdapter(addLinks(), this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(layoutManager);
     }
 
 }
