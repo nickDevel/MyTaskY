@@ -15,27 +15,21 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
         Context context;
-        IToaster toaster;
         private List<String> imagesLinks;
+        MyToaster myToaster;
 
-    public RecyclerViewAdapter(List<String> imagesLinks, IToaster toaster) {
+    public RecyclerViewAdapter(List<String> imagesLinks, MyToaster myToaster) {
         this.imagesLinks = imagesLinks;
-        this.toaster=toaster;
+        this.myToaster=myToaster;
     }
 
-        public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        public class MyViewHolder extends RecyclerView.ViewHolder{
             public ImageView image;
 
             public MyViewHolder(View view) {
                 super(view);
                 image = (ImageView) view.findViewById(R.id.imageView);
-                image.setOnClickListener(this);
-            }
-
-            @Override
-            public void onClick(View v) {
-
-                toaster.toaster(v);
+                myToaster.addClickListenerToViews(image);
             }
         }
 
@@ -47,6 +41,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             return new MyViewHolder(itemView);
         }
 
+        //Get display size, load with Picasso loader link and resize image to 1/2 of screen size
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
             WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -55,7 +50,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             String link = imagesLinks.get(position);
             ImageView image = holder.image;
             Picasso.with(context).load(link).resize(width,width).into(image);
-
         }
 
         @Override

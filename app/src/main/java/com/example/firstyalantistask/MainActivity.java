@@ -8,7 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +18,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, IToaster{
+public class MainActivity extends AppCompatActivity implements IToaster{
     @Bind(R.id.name) TextView name;
     @Bind(R.id.status) TextView status;
     @Bind(R.id.description) TextView description;
@@ -28,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.rlSolve) RelativeLayout rlSolve;
     @Bind(R.id.rlResponsible) RelativeLayout rlResponsible;
     @Bind(R.id.recyclerView) RecyclerView recyclerView;
+    MyToaster toaster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +35,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        toaster = new MyToaster(this);
         ButterKnife.bind(this);
         initRecyclerView();
         setOCL();
 
     }
-    //Getting links of images from resources
+    //Returns links List of images from resources
     List<String> addLinks(){
         List<String> links = new ArrayList<>();
         String[] resourceLinks = getResources().getStringArray(R.array.urls);
@@ -71,29 +71,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         return super.onOptionsItemSelected(item);
     }
+
     //Set OnClickListener for all Views
     void setOCL(){
-        name.setOnClickListener(this);
-        status.setOnClickListener(this);
-        description.setOnClickListener(this);
-        rlCreated.setOnClickListener(this);
-        rlRegistered.setOnClickListener(this);
-        rlSolve.setOnClickListener(this);
-        rlResponsible.setOnClickListener(this);
+        toaster.addClickListenerToViews(name, status, description);
+        toaster.addClickListenerToViews(rlCreated, rlRegistered, rlResponsible, rlSolve);
     }
 
+    //Interface method for making a toast
     @Override
-    public void onClick(View v) {
-        toaster(v);
-    }
-    //Interface method for RecyclerViewAdapter
-    @Override
-    public void toaster(View v){
-        StringBuilder toastText = new StringBuilder().append(getString(R.string.pressed_view)).append(" ")
-                .append(v.getClass().getSimpleName());
-        Toast.makeText(this,  toastText , Toast.LENGTH_SHORT).show();
+    public void toaster(String controlName){
+        Toast.makeText(this,  controlName , Toast.LENGTH_SHORT).show();
     }
 
+    //set key "back" close application
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
@@ -107,10 +98,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     void initRecyclerView(){
         recyclerView.setHasFixedSize(true);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new RecyclerViewAdapter(addLinks(), this));
+        recyclerView.setAdapter(new RecyclerViewAdapter(addLinks(), toaster));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
     }
-
 }
