@@ -14,17 +14,17 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
-        Context context;
-        private List<String> imagesLinks;
-        MyToaster myToaster;
+        Context context; //[Comment]  Wrong visibility modifier, wrong name
+        private List<String> imagesLinks; //[Comment] Wrong name
+        MyToaster myToaster; //[Comment] Wrong visibility modifier, wrong name
 
     public RecyclerViewAdapter(List<String> imagesLinks, MyToaster myToaster) {
-        this.imagesLinks = imagesLinks;
-        this.myToaster=myToaster;
+        this.imagesLinks = imagesLinks; ////[Comment] Good formatting
+        this.myToaster=myToaster; //[Comment] Wrong formatting
     }
 
         public class MyViewHolder extends RecyclerView.ViewHolder{
-            public ImageView image;
+            public ImageView image; //[Comment] Wrong visibility modifier, wrong name
 
             public MyViewHolder(View view) {
                 super(view);
@@ -46,7 +46,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public void onBindViewHolder(MyViewHolder holder, int position) {
             WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
             Display display = wm.getDefaultDisplay();
-            int width = display.getWidth()/2;
+            int width = display.getWidth()/2; //[Comment] Deprecated method
             String link = imagesLinks.get(position);
             ImageView image = holder.image;
             Picasso.with(context).load(link).resize(width,width).into(image);

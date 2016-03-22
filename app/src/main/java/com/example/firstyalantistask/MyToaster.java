@@ -4,10 +4,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class MyToaster implements View.OnClickListener {
-    IToaster toaster;
+    IToaster toaster; //[Comment] Wrong visibility modifier
 
     public MyToaster(IToaster toaster){
-        this.toaster=toaster;
+        this.toaster=toaster; //[Comment] Wrong formatting
 
     }
     //calls a method of interface to make toast
@@ -17,7 +17,7 @@ public class MyToaster implements View.OnClickListener {
     }
     //add onClickListener For Views array
     void addClickListenerToViews(View...view){
-        for(View v:view){
+        for(View v:view){ //[Comment] Wrong formatting
             v.setOnClickListener(this);
         }
     }

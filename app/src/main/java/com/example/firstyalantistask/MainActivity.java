@@ -18,6 +18,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+//[Comment] Wrong toolbar and status bar color
+//[Comment[ Wrong screen left and right paddings, see google material design guidelines
+//[Comment] Missing back arrow
 public class MainActivity extends AppCompatActivity implements IToaster{
     @Bind(R.id.name) TextView name;
     @Bind(R.id.status) TextView status;
@@ -26,8 +29,8 @@ public class MainActivity extends AppCompatActivity implements IToaster{
     @Bind(R.id.rlRegistered) RelativeLayout rlRegistered;
     @Bind(R.id.rlSolve) RelativeLayout rlSolve;
     @Bind(R.id.rlResponsible) RelativeLayout rlResponsible;
-    @Bind(R.id.recyclerView) RecyclerView recyclerView;
-    MyToaster toaster;
+    @Bind(R.id.recyclerView) RecyclerView recyclerView; //[Comment] Wrong names, use google code style
+    MyToaster toaster; //[Comment] Wrong visibility modifier
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +38,19 @@ public class MainActivity extends AppCompatActivity implements IToaster{
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toaster = new MyToaster(this);
+        toaster = new MyToaster(this); //[Comment] It you will have few screens, you will have memory leak here. You should unsubscribe MyToaster
         ButterKnife.bind(this);
         initRecyclerView();
-        setOCL();
+        setOCL(); //[Comment] setOnClickListeners()
 
     }
     //Returns links List of images from resources
-    List<String> addLinks(){
+    List<String> addLinks(){ //[Comment] Wrong visibility modifier
         List<String> links = new ArrayList<>();
         String[] resourceLinks = getResources().getStringArray(R.array.urls);
         for(String link:resourceLinks){
             links.add(link);
-        }return links;
+        }return links; //[Comment] Wrong formatting. Use Ctrl + ALT + L
     }
 
     @Override
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements IToaster{
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings) { //[Comment] We don't need menu and settings button here.
             return true;
         }
 

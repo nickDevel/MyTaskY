@@ -5,6 +5,8 @@
     android:paddingTop="@dimen/my_padding_img"
     android:paddingRight="@dimen/my_padding_img">
 
+    <!-- [Comment] Paddings should use dp not sp -->
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
