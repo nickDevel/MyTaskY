@@ -1,6 +1,7 @@
 package com.example.firstyalantistask;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.support.v7.widget.RecyclerView;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -24,7 +25,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
         public class MyViewHolder extends RecyclerView.ViewHolder{
-            public ImageView image; //[Comment] Wrong visibility modifier, wrong name
+            private ImageView image; //[Comment] Wrong name
 
             public MyViewHolder(View view) {
                 super(view);
@@ -46,7 +47,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public void onBindViewHolder(MyViewHolder holder, int position) {
             WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
             Display display = wm.getDefaultDisplay();
-            int width = display.getWidth()/2; //[Comment] Deprecated method
+            Point size = new Point();
+            display.getSize(size);
+            int width = size.x/2;
             String link = imagesLinks.get(position);
             ImageView image = holder.image;
             Picasso.with(context).load(link).resize(width,width).into(image);
