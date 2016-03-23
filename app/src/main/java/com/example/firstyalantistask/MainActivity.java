@@ -20,7 +20,6 @@ import butterknife.ButterKnife;
 
 //[Comment] Wrong toolbar and status bar color
 //[Comment[ Wrong screen left and right paddings, see google material design guidelines
-//[Comment] Missing back arrow
 public class MainActivity extends AppCompatActivity implements Toastable {
     @Bind(R.id.name)
     TextView name;
@@ -46,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements Toastable {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toaster = new MyToaster(this); //[Comment] It you will have few screens, you will have memory leak here. You should unsubscribe MyToaster
         ButterKnife.bind(this);
         initRecyclerView();

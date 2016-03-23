@@ -15,9 +15,9 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
-        Context context; //[Comment]  Wrong visibility modifier, wrong name
+        private Context context; //[Comment]  wrong name
         private List<String> imagesLinks; //[Comment] Wrong name
-        MyToaster myToaster; //[Comment] Wrong visibility modifier, wrong name
+        private MyToaster myToaster; //[Comment] wrong name
 
     public RecyclerViewAdapter(List<String> imagesLinks, MyToaster myToaster) {
         this.imagesLinks = imagesLinks;
