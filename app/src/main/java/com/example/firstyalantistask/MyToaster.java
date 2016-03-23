@@ -17,7 +17,7 @@ public class MyToaster implements View.OnClickListener {
     }
     //add onClickListener For Views array
     void addClickListenerToViews(View...view){
-        for(View v:view){ //[Comment] Wrong formatting
+        for(View v : view){ //[Comment] Wrong formatting
             v.setOnClickListener(this);
         }
     }
