@@ -118,8 +118,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:theme="@style/blackStyle"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:theme="@style/blackStyle"/>
             </RelativeLayout>
             <View
                 android:layout_width="match_parent"
