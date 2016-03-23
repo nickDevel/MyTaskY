@@ -21,16 +21,24 @@ import butterknife.ButterKnife;
 //[Comment] Wrong toolbar and status bar color
 //[Comment[ Wrong screen left and right paddings, see google material design guidelines
 //[Comment] Missing back arrow
-public class MainActivity extends AppCompatActivity implements IToaster{
-    @Bind(R.id.name) TextView name;
-    @Bind(R.id.status) TextView status;
-    @Bind(R.id.description) TextView description;
-    @Bind(R.id.rlCreated) RelativeLayout rlCreated;
-    @Bind(R.id.rlRegistered) RelativeLayout rlRegistered;
-    @Bind(R.id.rlSolve) RelativeLayout rlSolve;
-    @Bind(R.id.rlResponsible) RelativeLayout rlResponsible;
-    @Bind(R.id.recyclerView) RecyclerView recyclerView; //[Comment] Wrong names, use google code style
-    MyToaster toaster; //[Comment] Wrong visibility modifier
+public class MainActivity extends AppCompatActivity implements Toastable {
+    @Bind(R.id.name)
+    TextView name;
+    @Bind(R.id.status)
+    TextView status;
+    @Bind(R.id.description)
+    TextView description;
+    @Bind(R.id.rlCreated)
+    RelativeLayout rlCreated;
+    @Bind(R.id.rlRegistered)
+    RelativeLayout rlRegistered;
+    @Bind(R.id.rlSolve)
+    RelativeLayout rlSolve;
+    @Bind(R.id.rlResponsible)
+    RelativeLayout rlResponsible;
+    @Bind(R.id.recyclerView)
+    RecyclerView recyclerView; //[Comment] Wrong names, use google code style
+    private MyToaster toaster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +49,18 @@ public class MainActivity extends AppCompatActivity implements IToaster{
         toaster = new MyToaster(this); //[Comment] It you will have few screens, you will have memory leak here. You should unsubscribe MyToaster
         ButterKnife.bind(this);
         initRecyclerView();
-        setOCL(); //[Comment] setOnClickListeners()
+        setOnClickListeners();
 
     }
+
     //Returns links List of images from resources
-    List<String> addLinks(){ //[Comment] Wrong visibility modifier
+    private List<String> addLinks() {
         List<String> links = new ArrayList<>();
         String[] resourceLinks = getResources().getStringArray(R.array.urls);
-        for(String link:resourceLinks){
+        for (String link : resourceLinks) {
             links.add(link);
-        }return links; //[Comment] Wrong formatting. Use Ctrl + ALT + L
+        }
+        return links;
     }
 
     @Override
@@ -62,29 +72,19 @@ public class MainActivity extends AppCompatActivity implements IToaster{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) { //[Comment] We don't need menu and settings button here.
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
     //Set OnClickListener for all Views
-    void setOCL(){
+    void setOnClickListeners() {
         toaster.addClickListenerToViews(name, status, description);
         toaster.addClickListenerToViews(rlCreated, rlRegistered, rlResponsible, rlSolve);
     }
 
     //Interface method for making a toast
     @Override
-    public void toaster(String controlName){
-        Toast.makeText(this,  controlName , Toast.LENGTH_SHORT).show();
+    public void showToast(String controlName) {
+        Toast.makeText(this, controlName, Toast.LENGTH_SHORT).show();
     }
 
     //set key "back" close application
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements IToaster{
     }
 
     //initialize recyclerView for images
-    void initRecyclerView(){
+    void initRecyclerView() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(new RecyclerViewAdapter(addLinks(), toaster));
