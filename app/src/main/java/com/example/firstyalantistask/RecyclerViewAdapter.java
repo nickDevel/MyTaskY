@@ -19,8 +19,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         MyToaster myToaster; //[Comment] Wrong visibility modifier, wrong name
 
     public RecyclerViewAdapter(List<String> imagesLinks, MyToaster myToaster) {
-        this.imagesLinks = imagesLinks; ////[Comment] Good formatting
-        this.myToaster=myToaster; //[Comment] Wrong formatting
+        this.imagesLinks = imagesLinks;
+        this.myToaster = myToaster;
     }
 
         public class MyViewHolder extends RecyclerView.ViewHolder{
