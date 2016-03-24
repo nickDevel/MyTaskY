@@ -9,54 +9,59 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
-        private Context context; //[Comment]  wrong name
-        private List<String> imagesLinks; //[Comment] Wrong name
-        private MyToaster myToaster; //[Comment] wrong name
+    private Context activity; //[Comment]  wrong name
+    private List<String> imagesLinks; //[Comment] Wrong name
 
-    public RecyclerViewAdapter(List<String> imagesLinks, MyToaster myToaster) {
+    public RecyclerViewAdapter(List<String> imagesLinks, Context context) {
         this.imagesLinks = imagesLinks;
-        this.myToaster = myToaster;
+        activity = context;
     }
 
-        public class MyViewHolder extends RecyclerView.ViewHolder{
-            private ImageView image; //[Comment] Wrong name
+    @Override
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.image_layout, parent, false);
+        activity = parent.getContext();
+        return new MyViewHolder(itemView);
+    }
 
-            public MyViewHolder(View view) {
-                super(view);
-                image = (ImageView) view.findViewById(R.id.imageView);
-                myToaster.addClickListenerToViews(image);
-            }
-        }
+    //Get display size, load with Picasso loader link and resize image to 1/2 of screen size
+    @Override
+    public void onBindViewHolder(MyViewHolder holder, int position) {
+        WindowManager wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x / 2;
+        String link = imagesLinks.get(position);
+        ImageView image = holder.imageView;
+        Picasso.with(activity).load(link).resize(width, width).into(image);
+    }
 
-        @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.image_layout, parent, false);
-            context = parent.getContext();
-            return new MyViewHolder(itemView);
-        }
+    @Override
+    public int getItemCount() {
+        return imagesLinks.size();
+    }
 
-        //Get display size, load with Picasso loader link and resize image to 1/2 of screen size
-        @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
-            WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-            Display display = wm.getDefaultDisplay();
-            Point size = new Point();
-            display.getSize(size);
-            int width = size.x/2;
-            String link = imagesLinks.get(position);
-            ImageView image = holder.image;
-            Picasso.with(context).load(link).resize(width,width).into(image);
-        }
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        private ImageView imageView; //[Comment] Wrong name
 
-        @Override
-        public int getItemCount() {
-            return imagesLinks.size();
+        public MyViewHolder(View view) {
+            super(view);
+            imageView = (ImageView) view.findViewById(R.id.imageView);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(activity, v.getClass().getSimpleName(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
+}

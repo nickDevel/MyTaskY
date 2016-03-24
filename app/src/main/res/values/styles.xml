@@ -32,4 +32,11 @@
         <item name="android:textSize">@dimen/textSize</item>
         <item name="android:textColor">@color/whiteColor</item>
     </style>
+
+    <style name="YalantisTheme" parent="Theme.AppCompat.NoActionBar" >
+        <item name="android:windowBackground">@color/backgroundColor</item>
+        <item name="android:colorBackground">@color/backgroundColor</item>
+        <item name="colorPrimary">@color/toolbarColor</item>
+    </style>
+
 </resources>

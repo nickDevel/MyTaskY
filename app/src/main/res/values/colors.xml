@@ -8,6 +8,6 @@
     <color name="whiteColor">#ffffff</color>
     <color name="statusColor">#f89900</color>
     <color name="toolbarColor">#557CAC</color>
-    <color name="actionbarColor">#446389</color>
+    <color name="statusBarColor">#546e7a</color>
     <color name="backgroundColor">#ebebeb</color>
 </resources>

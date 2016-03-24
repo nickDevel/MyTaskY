@@ -8,6 +8,7 @@
     <dimen name="my_padding_img">10dp</dimen>
     <dimen name="textSize">25dp</dimen>
     <dimen name="textHeaderSize">30dp</dimen>
+    <dimen name="radius">20sp</dimen>
     <dimen name="divider_height">1dp</dimen>
 
 </resources>
