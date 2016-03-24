@@ -1,14 +1,14 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="fab_margin">5dp</dimen>
-    <dimen name="my_margin">7dp</dimen>
-    <dimen name="my_padding">10dp</dimen>
-    <dimen name="my_padding_img">7dp</dimen>
-    <dimen name="textSize">15dp</dimen>
-    <dimen name="textHeaderSize">20dp</dimen>
-    <dimen name="radius">15dp</dimen>
-    <dimen name="divider_height">1dp</dimen>
+  <!-- Default screen margins, per the Android Design guidelines. -->
+  <dimen name="activity_horizontal_margin">16dp</dimen>
+  <dimen name="activity_vertical_margin">16dp</dimen>
+  <dimen name="fab_margin">5dp</dimen>
+  <dimen name="my_margin">7dp</dimen>
+  <dimen name="my_padding">10dp</dimen>
+  <dimen name="my_padding_img">7dp</dimen>
+  <dimen name="textSize">15dp</dimen>
+  <dimen name="textHeaderSize">20dp</dimen>
+  <dimen name="radius">15dp</dimen>
+  <dimen name="divider_height">1dp</dimen>
 
 </resources>

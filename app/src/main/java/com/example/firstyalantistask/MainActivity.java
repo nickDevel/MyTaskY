@@ -19,91 +19,91 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    @Bind(R.id.name)
-    TextView mTextViewName;
-    @Bind(R.id.status)
-    TextView mTextViewStatus;
-    @Bind(R.id.description)
-    TextView mTextViewDescription;
-    @Bind(R.id.rlCreated)
-    RelativeLayout mRelativeLayoutCreated;
-    @Bind(R.id.rlRegistered)
-    RelativeLayout mRelativeLayoutRegistered;
-    @Bind(R.id.rlSolve)
-    RelativeLayout mRelativeLayoutSolve;
-    @Bind(R.id.rlResponsible)
-    RelativeLayout mRelativeLayoutResponsible;
-    @Bind(R.id.recyclerView)
-    RecyclerView mRecyclerView;
+  @Bind(R.id.name)
+  TextView mTextViewName;
+  @Bind(R.id.status)
+  TextView mTextViewStatus;
+  @Bind(R.id.description)
+  TextView mTextViewDescription;
+  @Bind(R.id.rlCreated)
+  RelativeLayout mRelativeLayoutCreated;
+  @Bind(R.id.rlRegistered)
+  RelativeLayout mRelativeLayoutRegistered;
+  @Bind(R.id.rlSolve)
+  RelativeLayout mRelativeLayoutSolve;
+  @Bind(R.id.rlResponsible)
+  RelativeLayout mRelativeLayoutResponsible;
+  @Bind(R.id.recyclerView)
+  RecyclerView mRecyclerView;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ButterKnife.bind(this);
-        initializeRecyclerView();
-        setOnClickListeners();
+    ButterKnife.bind(this);
+    initializeRecyclerView();
+    setOnClickListeners();
+  }
+
+  // Returns links List of images from resources
+  private List<String> addLinks() {
+    List<String> links = new ArrayList<>();
+    String[] resourceLinks = getResources().getStringArray(R.array.urls);
+    for (String link : resourceLinks) {
+      links.add(link);
     }
+    return links;
+  }
 
-    // Returns links List of images from resources
-    private List<String> addLinks() {
-        List<String> links = new ArrayList<>();
-        String[] resourceLinks = getResources().getStringArray(R.array.urls);
-        for (String link : resourceLinks) {
-            links.add(link);
-        }
-        return links;
-    }
+  // Set OnClickListener for all Views
+  private void setOnClickListeners() {
+    addClickListenerToViews(mTextViewName, mTextViewStatus, mTextViewDescription);
+    addClickListenerToViews(mRelativeLayoutCreated, mRelativeLayoutRegistered,
+	mRelativeLayoutResponsible, mRelativeLayoutSolve);
+  }
 
-    // Set OnClickListener for all Views
-    private void setOnClickListeners() {
-        addClickListenerToViews(mTextViewName, mTextViewStatus, mTextViewDescription);
-        addClickListenerToViews(mRelativeLayoutCreated, mRelativeLayoutRegistered,
-                mRelativeLayoutResponsible, mRelativeLayoutSolve);
+  // Set key "back" close application
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+      finish();
+      return true;
     }
+    return super.onKeyDown(keyCode, event);
+  }
 
-    // Set key "back" close application
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            finish();
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
+  // Initialize recyclerView for images
+  private void initializeRecyclerView() {
+    mRecyclerView.setHasFixedSize(true);
+    mRecyclerView.setAdapter(new RecyclerViewAdapter(addLinks()));
+    LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+    layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+    mRecyclerView.setLayoutManager(layoutManager);
+  }
 
-    // Initialize recyclerView for images
-    private void initializeRecyclerView() {
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setAdapter(new RecyclerViewAdapter(addLinks()));
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        mRecyclerView.setLayoutManager(layoutManager);
+  // Add onClickListener For Views in array of ViewGroups
+  private void addClickListenerToViews(ViewGroup... view) {
+    for (ViewGroup v : view) {
+      for (int i = 0; i < v.getChildCount(); i++) {
+	View child = v.getChildAt(i);
+	child.setOnClickListener(this);
+      }
     }
+  }
 
-    // Add onClickListener For Views in array of ViewGroups
-    private void addClickListenerToViews(ViewGroup... view) {
-        for (ViewGroup v : view) {
-            for (int i = 0; i < v.getChildCount(); i++) {
-                View child = v.getChildAt(i);
-                child.setOnClickListener(this);
-            }
-        }
+  // Add onClickListener For Views array
+  private void addClickListenerToViews(View... view) {
+    for (View v : view) {
+      v.setOnClickListener(this);
     }
+  }
 
-    // Add onClickListener For Views array
-    private void addClickListenerToViews(View... view) {
-        for (View v : view) {
-            v.setOnClickListener(this);
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        Toast.makeText(this, v.getClass().getSimpleName(), Toast.LENGTH_SHORT).show();
-    }
+  @Override
+  public void onClick(View v) {
+    Toast.makeText(this, v.getClass().getSimpleName(), Toast.LENGTH_SHORT).show();
+  }
 }
