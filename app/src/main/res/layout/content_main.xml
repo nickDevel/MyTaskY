@@ -53,7 +53,7 @@
                     android:layout_alignParentLeft="false"
                     android:layout_alignParentStart="false"
                     android:layout_below="@+id/name"
-                    android:background="@drawable/status_background"
+                    android:background="@drawable/status_background_in_progress"
                     android:layout_marginBottom="@dimen/my_margin"
                     android:theme="@style/whiteStyle"
                     android:textAppearance="?android:attr/textAppearanceMedium" />

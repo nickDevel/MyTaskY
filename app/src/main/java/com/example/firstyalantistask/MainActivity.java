@@ -18,24 +18,23 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-//[Comment[ Wrong screen left and right paddings, see google material design guidelines
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.name)
-    TextView name;
+    TextView mTextViewName;
     @Bind(R.id.status)
-    TextView status;
+    TextView mTextViewStatus;
     @Bind(R.id.description)
-    TextView description;
+    TextView mTextViewDescription;
     @Bind(R.id.rlCreated)
-    RelativeLayout rlCreated;
+    RelativeLayout mRelativeLayoutCreated;
     @Bind(R.id.rlRegistered)
-    RelativeLayout rlRegistered;
+    RelativeLayout mRelativeLayoutRegistered;
     @Bind(R.id.rlSolve)
-    RelativeLayout rlSolve;
+    RelativeLayout mRelativeLayoutSolve;
     @Bind(R.id.rlResponsible)
-    RelativeLayout rlResponsible;
+    RelativeLayout mRelativeLayoutResponsible;
     @Bind(R.id.recyclerView)
-    RecyclerView recyclerView; //[Comment] Wrong names, use google code style
+    RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setOnClickListeners();
     }
 
-    //Returns links List of images from resources
+    // Returns links List of images from resources
     private List<String> addLinks() {
         List<String> links = new ArrayList<>();
         String[] resourceLinks = getResources().getStringArray(R.array.urls);
@@ -60,13 +59,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return links;
     }
 
-    //Set OnClickListener for all Views
-    void setOnClickListeners() {
-        addClickListenerToViews(name, status, description);
-        addClickListenerToViews(rlCreated, rlRegistered, rlResponsible, rlSolve);
+    // Set OnClickListener for all Views
+    private void setOnClickListeners() {
+        addClickListenerToViews(mTextViewName, mTextViewStatus, mTextViewDescription);
+        addClickListenerToViews(mRelativeLayoutCreated, mRelativeLayoutRegistered,
+                mRelativeLayoutResponsible, mRelativeLayoutSolve);
     }
 
-    //set key "back" close application
+    // Set key "back" close application
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
@@ -76,17 +76,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onKeyDown(keyCode, event);
     }
 
-    //initialize recyclerView for images
-    void initializeRecyclerView() {
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new RecyclerViewAdapter(addLinks(), this));
+    // Initialize recyclerView for images
+    private void initializeRecyclerView() {
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setAdapter(new RecyclerViewAdapter(addLinks()));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setLayoutManager(layoutManager);
     }
 
-    //add onClickListener For Views in array of ViewGroups
-    void addClickListenerToViews(ViewGroup... view) {
+    // Add onClickListener For Views in array of ViewGroups
+    private void addClickListenerToViews(ViewGroup... view) {
         for (ViewGroup v : view) {
             for (int i = 0; i < v.getChildCount(); i++) {
                 View child = v.getChildAt(i);
@@ -95,8 +95,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    //add onClickListener For Views array
-    void addClickListenerToViews(View... view) {
+    // Add onClickListener For Views array
+    private void addClickListenerToViews(View... view) {
         for (View v : view) {
             v.setOnClickListener(this);
         }

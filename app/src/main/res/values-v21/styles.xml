@@ -1,13 +1,13 @@
 <resources>>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="YalantisTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="YalantisTheme" parent="Theme.AppCompat">
         <item name="android:statusBarColor">@color/statusBarColor</item>
         <item name="android:windowBackground">@color/backgroundColor</item>
         <item name="android:colorBackground">@color/backgroundColor</item>
