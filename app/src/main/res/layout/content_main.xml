@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/name"
-            android:id="@+id/name"
+            android:id="@+id/text_view_name"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="false"
@@ -48,11 +48,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/term_in_process"
-            android:id="@+id/status"
+            android:id="@+id/text_view_status"
             android:layout_alignParentTop="false"
             android:layout_alignParentLeft="false"
             android:layout_alignParentStart="false"
-            android:layout_below="@+id/name"
+            android:layout_below="@+id/text_view_name"
             android:background="@drawable/status_background_in_progress"
             android:layout_marginBottom="@dimen/my_margin"
             android:theme="@style/whiteStyle"
@@ -69,7 +69,7 @@
           android:layout_height="match_parent"
           android:paddingBottom="@dimen/my_padding"
           android:paddingTop="@dimen/my_padding"
-          android:id="@+id/rlCreated">
+          android:id="@+id/relative_layout_created">
 
         <TextView
             android:layout_width="wrap_content"
@@ -100,7 +100,7 @@
           android:layout_height="match_parent"
           android:paddingBottom="@dimen/my_padding"
           android:paddingTop="@dimen/my_padding"
-          android:id="@+id/rlRegistered">
+          android:id="@+id/relative_layout_registered">
 
         <TextView
             android:layout_width="wrap_content"
@@ -130,21 +130,21 @@
           android:layout_height="match_parent"
           android:paddingBottom="@dimen/my_padding"
           android:paddingTop="@dimen/my_padding"
-          android:id="@+id/rlSolve">
+          android:id="@+id/relative_layout_solve">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/solve_to"
-            android:id="@+id/solveto"
+            android:id="@+id/solve_to"
             android:theme="@style/greyStyle"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/solve_to_date"
-            android:id="@+id/solvetoDate"
+            android:id="@+id/solve_to_date"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -161,7 +161,7 @@
           android:layout_height="match_parent"
           android:paddingBottom="@dimen/my_padding"
           android:paddingTop="@dimen/my_padding"
-          android:id="@+id/rlResponsible">
+          android:id="@+id/relative_layout_responsible">
 
         <TextView
             android:layout_width="wrap_content"
@@ -192,7 +192,7 @@
           android:layout_height="wrap_content"
           android:textAppearance="?android:attr/textAppearanceMedium"
           android:text="@string/description"
-          android:id="@+id/description"
+          android:id="@+id/text_view_description"
           android:paddingTop="@dimen/my_padding_img"
           android:paddingBottom="@dimen/my_padding"
           android:theme="@style/blackStyle"/>
@@ -200,7 +200,7 @@
       <android.support.v7.widget.RecyclerView
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:id="@+id/recyclerView"/>
+          android:id="@+id/recycler_view"/>
     </LinearLayout>
   </ScrollView>
 </RelativeLayout>

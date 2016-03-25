@@ -19,21 +19,21 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-  @Bind(R.id.name)
+  @Bind(R.id.text_view_name)
   TextView mTextViewName;
-  @Bind(R.id.status)
+  @Bind(R.id.text_view_status)
   TextView mTextViewStatus;
-  @Bind(R.id.description)
+  @Bind(R.id.text_view_description)
   TextView mTextViewDescription;
-  @Bind(R.id.rlCreated)
+  @Bind(R.id.relative_layout_created)
   RelativeLayout mRelativeLayoutCreated;
-  @Bind(R.id.rlRegistered)
+  @Bind(R.id.relative_layout_registered)
   RelativeLayout mRelativeLayoutRegistered;
-  @Bind(R.id.rlSolve)
+  @Bind(R.id.relative_layout_solve)
   RelativeLayout mRelativeLayoutSolve;
-  @Bind(R.id.rlResponsible)
+  @Bind(R.id.relative_layout_responsible)
   RelativeLayout mRelativeLayoutResponsible;
-  @Bind(R.id.recyclerView)
+  @Bind(R.id.recycler_view)
   RecyclerView mRecyclerView;
 
   @Override
